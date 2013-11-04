@@ -1,0 +1,42 @@
+<style>
+.weather_block{
+    margin: 10px auto 0px;
+    width: 160px;
+}
+.weather_title{
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+.weather_date{
+    font-style: italic;
+}
+.weather_day{
+    margin-bottom: 20px;
+    
+}
+.day_part{
+    margin: 5px 0px;
+    
+}
+</style>
+<div class="weather_block">
+<div class="weather_title">{$settings.title}</div>
+{foreach from=$weather_data key=date item=day}
+<div class="weather_day">
+<div class="weather_date">{$day.date.d} {$day.date.month}, {$day.date.week_day}</div>
+
+{if $settings.details}
+    {include file="../templates/DayPart.html" daypart_name="morning" daypart=$day.morning}
+    {include file="../templates/DayPart.html" daypart_name="day" daypart=$day.day}
+    {include file="../templates/DayPart.html" daypart_name="evening" daypart=$day.evening}
+    {include file="../templates/DayPart.html" daypart_name="night" daypart=$day.night}
+{else}
+    {include file="../templates/DayPart.html" daypart_name="day_short" daypart=$day.day_short}
+    {include file="../templates/DayPart.html" daypart_name="night_short" daypart=$day.night_short}
+{/if}
+
+</div>
+<hr />
+{/foreach}
+</div>

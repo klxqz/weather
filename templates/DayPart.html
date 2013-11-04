@@ -1,0 +1,37 @@
+<div class="day_part">
+{if $daypart_name=='morning'}
+    Утро
+{elseif $daypart_name=='day'}
+    День
+{elseif $daypart_name=='evening'}
+    Вечер
+{elseif $daypart_name=='night'}
+    Ночь
+{elseif $daypart_name=='day_short'}
+    День
+{elseif $daypart_name=='night_short'}
+    Ночь
+{/if}
+
+
+<img title="{$daypart.weather_type}" src="http://yandex.st/weather/1.1.78/i/icons/48x48/{$daypart['image-v3']}.png"/>
+{if $daypart.temperature_from!='' && $daypart.temperature_to!=''}
+    {if $daypart.temperature_from > 0}
+        +{$daypart.temperature_from}
+    {else}
+        {$daypart.temperature_from}
+    {/if}
+    ..
+    {if $daypart.temperature_to > 0}
+        +{$daypart.temperature_to}
+    {else}
+        {$daypart.temperature_to}
+    {/if}
+{elseif $daypart.temperature!=0}
+    {if $daypart.temperature > 0}
+            +{$daypart.temperature}
+    {else}
+            {$daypart.temperature}
+    {/if}
+{/if}
+</div>

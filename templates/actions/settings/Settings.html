@@ -1,0 +1,111 @@
+<h1>Погода</h1>
+<div     class="fields form">
+    <form action="?plugin=weather&action=save" method="post" id="plugins-settings-form">
+    {$wa->csrf()}
+    
+    
+    {literal}
+    <p>{shopWeatherPlugin::display()} - Код хелпера вывода</p>
+    {/literal}
+    <p class="gray">
+    <i class="icon16 exclamation"></i>
+    Используя этот код Вы можете осуществить вывод "Погоды" в любом месте вашей темы оформления, это позволяет избавиться от привязки к конкретным местам вывода плагина
+    </p>
+    
+    <div class="field">
+        <div class="name">
+            Статус
+        </div>
+        <div class="value">
+            <select name="shop_weather[status]">
+                <option value="1" {if $settings.status==1}selected="selected"{/if}>Включен</option>  
+                <option value="0" {if $settings.status==0}selected="selected"{/if}>Выключен</option>    
+            </select>
+        </div>
+    </div>
+    
+    <div class="field">
+        <div class="name">
+            Вывод плагина в стандартном месте
+        </div>
+        <div class="value">
+            <select name="shop_weather[default_output]">
+                <option {if $settings.default_output == 1} selected="selected"{/if} value="1">Включен</option>
+                <option {if $settings.default_output == 0} selected="selected"{/if} value="0">Выключен</option>
+            </select>
+            <p class="gray">
+            <i class="icon16 exclamation"></i>
+            Вы можете отключить стандартный вывод, это может быть полезно если вы используете хелпер вывода
+            </p>
+        </div>
+    </div>
+    
+    
+    <div class="field">
+        <div class="name">
+            Город
+        </div>
+        <div class="value">
+            <select name="shop_weather[city]">
+                {foreach from=$cities key=country_name item=country}
+                <optgroup label="{$country_name}">
+                    {foreach from=$country item=city}
+                    <option value="{$city.id}" {if $settings.city==$city.id}selected="selected"{/if}>{$city.name}</option>
+                    {/foreach}
+                </optgroup>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    
+    
+    <div class="field">
+        <div class="name">
+            Прогноз погоды на количество дней
+        </div>
+        <div class="value">
+            <select name="shop_weather[num_days]">
+                {for $day=1 to 10}
+                    <option value="{$day}" {if $settings.num_days==$day}selected="selected"{/if}>{$day}</option>
+                {/for}
+
+            </select>
+        </div>
+    </div>
+    
+    <div class="field">
+        <div class="name">
+            Подробный вывод
+        </div>
+        <div class="value">
+            <select name="shop_weather[details]">
+                <option value="1" {if $settings.details==1}selected="selected"{/if}>Да</option>
+                <option value="0" {if $settings.details==0}selected="selected"{/if}>Нет</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="field">
+        <div class="name">
+            Заголовок блока
+        </div>
+        <div class="value">
+            <input name="shop_weather[title]" value="{$settings.title|escape}" />
+        </div>
+    </div>
+    
+    
+
+
+
+
+    <div class="field">
+        <div class="value submit">
+            <input type="submit" class="button green" value="Сохранить">
+            <span id="plugins-settings-form-status" style="display:none">
+                <i style="vertical-align:middle" class="icon16 yes"></i> [`Saved`]
+            </span>
+        </div>
+    </div>
+    </form>
+</div>
