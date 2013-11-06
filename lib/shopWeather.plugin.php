@@ -1,7 +1,25 @@
 <?php
 class shopWeatherPlugin extends shopPlugin
 {
+    protected static $plugin;
 
+    public function __construct($info)
+    {
+        parent::__construct($info);
+        if(!self::$plugin) {
+            self::$plugin = &$this;
+        }   
+    }
+    
+    protected static function getThisPlugin()
+    {
+        if(self::$plugin) {
+            return self::$plugin;
+        } else {
+            return wa()->getPlugin('productday'); 
+        }       
+    }
+    
     public function frontendNav()
     {
         if($this->getSettings('default_output')) {
@@ -26,7 +44,7 @@ class shopWeatherPlugin extends shopPlugin
     
     public static function display()
     {
-        $plugin = wa()->getPlugin('weather');
+        $plugin = self::getThisPlugin();
         
         if($plugin->getSettings('status')) {
             $city_id = $plugin->getSettings('city');
