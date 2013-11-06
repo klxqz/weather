@@ -16,7 +16,7 @@ class shopWeatherPlugin extends shopPlugin
         if(self::$plugin) {
             return self::$plugin;
         } else {
-            return wa()->getPlugin('productday'); 
+            return wa()->getPlugin('weather'); 
         }       
     }
     
