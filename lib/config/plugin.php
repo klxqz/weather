@@ -3,8 +3,8 @@
 return array(
     'name' => 'Погода',
     'description' => 'Плагин выводит прогноз погоды',
-    'vendor' => 903438,
-    'version' => '1.0.1',
+    'vendor' => '985310',
+    'version' => '1.0.2',
     'img' => 'img/weather.png',
     'shop_settings' => true,
     'frontend' => true,
